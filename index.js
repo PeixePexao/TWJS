@@ -16,19 +16,21 @@ for (i = 3; i < parseInt(num) + 3; i++) {
 for (i = 0; i < (parseInt(num) + 3) * 2; i++) {
     quadrados[i] = i * i;
 }
-
-for (i = 0; i < somas.length; i++) {
-    for (z = 0; z < quadrados.length; z++) {
-        if (somas[i] == quadrados[z]) {
-            if (z < somas [i]) {
-                z = somas[i];
-            }
-            console.log('Match!');
-            var maisum = diario[i] + 1
-            data = '' + diario[i] + ',' + maisum + ',' + somas[i] + ',' + Math.sqrt(somas[i]) + '\n'; 
-            fs.appendFile('result.csv', data, err => {})
-        }
+let obj = {}
+for (let i = 0; i < quadrados.length; i++) {
+    if(!obj[quadrados[i]]) {
+        const element = quadrados[i];
+        obj[element] = quadrados[i];
     }
 }
+var data = " ";
+for (let i = 0; i < somas.length; i++) {
+    if(obj[somas[i]]) {
+        console.log("Match (" + somas[i] + ", " + diario[i] + ")")
+        
+    }
+}
+
+
 var fim = new Date() - start;
-console.log("Execução terminada em " + fim + 'ms');
+console.log("Execução terminada em " + fim / 1000 + 's');
