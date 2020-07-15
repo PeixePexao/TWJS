@@ -7,7 +7,7 @@ var diario = [];
 var start = new Date();
 
 num = prompt("Quantas vezes você quer aumentar x em x² + (x + 1)²?");
-fs.writeFile('result.csv', 'x,x+1,c,sqrt(c)\n', err => {})
+
 
 for (i = 3; i < parseInt(num) + 3; i++) {
     somas[i] = (i * i) + ((i + 1) * (i + 1))
@@ -23,14 +23,15 @@ for (let i = 0; i < quadrados.length; i++) {
         obj[element] = quadrados[i];
     }
 }
-var data = " ";
+var data = "x,x+1,c,c²\n";
 for (let i = 0; i < somas.length; i++) {
     if(obj[somas[i]]) {
         console.log("Match (" + somas[i] + ", " + diario[i] + ")")
+        data = data + String(diario[i]) + "," + String(diario[i] + 1) + "," + String(Math.sqrt(somas[i])) + "," + String(somas[i]) + "\n";
         
     }
 }
-
-
+console.log(data);
+fs.writeFile('result.csv', data, err => {});
 var fim = new Date() - start;
 console.log("Execução terminada em " + fim / 1000 + 's');
